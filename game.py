@@ -50,7 +50,7 @@ def update_dashes(w,g,d):
 
 def get_guess():
     print("""Welcome to [HELLO WORLD]le, the game show where we test contestents on thier python knowledge to win 10,000 dollars(worth of bragging rights). I'm your host Tracy Turtlesmith and today we're playing guess the python function. 
-          At any point, if you want to solve it all, guess "final guess" """)
+        At any point, if you want to guess the whole word, guess "final guess" """)
     global dash
     missed = []
     accurate = False
