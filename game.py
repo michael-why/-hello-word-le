@@ -21,36 +21,38 @@ words = ['abs', 'aiter', 'all', 'anext', 'any', 'ascii',
 secret_word = random.choice(words)
 
 #dash setup
-da = ""
+dash = ""
 
 for i in secret_word:
     if i != " ":
-        da += "_"
+        dash += "_"
     else:
-        da += " "
+        dash += " "
 
-sh = "()" + str(len(da)) + "Total Characters)"
-
-dash = da + sh
 
 the_guess = "_"
+count = 0
 
 #dash redefinition
 def update_dashes(w,g,d):
     global dash
+    global count
+    c_update = 0
     updated = ""
     for i in range(len(w)):
         if w[i] == g:
             updated += g
+            c_update += 1
         else:
             updated += d[i]
+    count = c_update
     dash = updated
     return updated
 
 
 def get_guess():
     print("""Welcome to [HELLO WORLD]le, the game show where we test contestents on thier python knowledge to win 10,000 dollars(worth of bragging rights). I'm your host Tracy Turtlesmith and today we're playing guess the python function. 
-        At any point, if you want to guess the whole word, guess "final guess" """)
+          At any point, if you want to solve it all, guess "final guess" """)
     global dash
     missed = []
     accurate = False
@@ -71,7 +73,8 @@ def get_guess():
                     if guess == letter:
                         accurate = True
                 if accurate == True:
-                    print(guess + " is in the secret word")
+                    update_dashes(secret_word,guess,dash)
+                    print(guess + " is in the secret word " + str(count) + " times")
                     accurate = False
                 else:
                     print(guess + " is not in the secret word")
@@ -83,13 +86,11 @@ def get_guess():
         else:
             print("your guess must have exactly one character!")
         the_guess = guess
-        print(update_dashes(secret_word,guess,dash))
+        print(update_dashes(secret_word,guess,dash) + "(" + str(len(dash)) + " Total Characters)")
     if dash == secret_word:
       victory(True)
     else:
         victory(False)
-        
-
 
 def victory(w):
     if w == True: 
